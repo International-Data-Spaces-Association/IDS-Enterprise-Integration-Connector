@@ -1,0 +1,64 @@
+version: '2.3'
+services:
+
+#  eis-connector-ui:
+#    image: app-store.ids.isst.fraunhofer.de:5000/ids/mdm-connector-ui:0.0.5-SNAPSHOT
+#    restart: on-failure:5
+#    stdin_open: true
+#    environment:
+#      - CONNECTOR_URL=https://18.157.207.100:443/
+#    tty: true
+#    expose:
+#      - "3000"
+
+  reverseproxy:
+    build: reverseproxy
+    #image: app-store.ids.isst.fraunhofer.de:5000/ids/eis-mdm-reverseproxy:4.0.2-SNAPSHOT
+    restart: on-failure:5
+    ports:
+      - "443:443"
+      - "80:80"
+
+  mdm-connector:
+    build: mdm-connector
+    #image: app-store.ids.isst.fraunhofer.de:5000/ids/mdm-connector:4.0.2-SNAPSHOT
+    restart: on-failure:5
+    environment:
+      - BROKER_URL=https://broker.ids.isst.fraunhofer.de
+      - DAPS_URL=https://daps.aisec.fraunhofer.de/v2
+      #- DAPS_URL=https://daps.aisec.fraunhofer.de
+    volumes:
+      - ./shared:/var/ids/
+    expose:
+      - "8008"
+
+#  semanticinstancemanager:
+#    image: app-store.ids.isst.fraunhofer.de:5000/ids/semanticinstancemanager
+#    restart: on-failure:5
+#    environment:
+#      - http.port=8080
+#      - http.cors.enabled=true
+#      - http.cors.allow-origin=https://localhost
+#      - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
+#      - http.cors.allow-credentials=true
+#    expose:
+#      - "8080"
+ 
+#  sftp:
+#    image: app-store.ids.isst.fraunhofer.de:5000/ids/eis-sftp:1.0.0
+#    volumes:
+#     - ./shared/artifacts:/home/ids/sharing
+#     - ./sftp/user-keys:/home/ids/.ssh/keys/
+#     - ./sftp/server-keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key
+#     - ./sftp/server-keys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key  #
+
+#    ports:
+#      - "8080:22"
+#    command: "ids::1000"#
+
+#  google-or:
+#    image: app-store.ids.isst.fraunhofer.de:5000/ids/eis-google-or:1.0.0
+#    restart: on-failure:5
+#   expose:
+#     - "8100"
+

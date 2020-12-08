@@ -1,0 +1,26 @@
+ {
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:Resource",
+  "@id" : "https://w3id.org/idsa/autogen/resource/5ec9d1ce-13ec-471f-91e9-954f483d33483",
+  "ids:language" : [ {
+    "@id" : "idsc:DE"
+  } ],
+  "ids:description" : [ {
+    "@value" : "FCD Data of the last 15 minutes.",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:keyword" : [ {
+    "@value" : "MobiDS",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+ "ids:title" : [ {
+    "@value" : "FCD Data - current Status",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:contentType" : {
+    "@id" : "idsc:SCHEMA_DEFINITION"
+  }
+}

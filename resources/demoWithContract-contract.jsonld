@@ -1,0 +1,75 @@
+ {
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:ContractOffer",
+  "@id" : "https://w3id.org/idsa/autogen/contractOffer/846894eb-2912-4bcc-b665-856584e1cadea2",
+  "ids:permission" : [ {
+    "@type" : "ids:Permission",
+    "@id" : "https://w3id.org/idsa/autogen/permission/179911f2-a8a5-40c1-a8a5-fb59aa596023a2",
+    "ids:target" : {
+      "@id" : "https://w3id.org/idsa/autogen/artifact/13bf0c4a-3fc3-4ccb-aa88-7da93e6ea6e3a2"
+    },
+    "ids:constraint" : [ {
+      "@type" : "ids:Constraint",
+      "@id" : "https://w3id.org/idsa/autogen/constraint/4f1fd9a2-4ab5-49fe-8dbd-9a7588e0485ba2",
+      "ids:leftOperand" : {
+        "@id" : "idsc:ELAPSED_TIME"
+      },
+      "ids:operator" : {
+        "@id" : "idsc:SHORTER"
+      },
+      "ids:rightOperand" : {
+        "@value" : "P60D",
+        "@type" : "https://www.w3.org/TR/xmlschema11-2/#duration"
+      }
+    } ],
+    "ids:assigner" : [ {
+      "@id" : "http://exampleProvider.example.org"
+    } ],
+    "ids:assignee" : [ {
+      "@id" : "www.example.org/YourURI"
+    } ],
+    "ids:action" : [ {
+      "@id" : "idsc:USE"
+    } ],
+    "ids:preDuty" : [ {
+      "@type" : "ids:Duty",
+      "@id" : "https://w3id.org/idsa/autogen/duty/0b76aabe-8fd4-47e3-bb9e-ed3e161f3ff4a2",
+      "ids:constraint" : [ {
+        "@type" : "ids:Constraint",
+        "@id" : "https://w3id.org/idsa/autogen/constraint/250bc7bd-81ba-41da-b086-5c8c17fede56a2",
+        "ids:leftOperand" : {
+          "@id" : "idsc:PAY_AMOUNT"
+        },
+        "ids:operator" : {
+          "@id" : "idsc:EQUALS"
+        },
+        "ids:rightOperand" : {
+          "@value" : "100.00",
+          "@type" : "https://www.wikidata.org/wiki/Q4916"
+        }
+      } ],
+      "ids:assigner" : [ {
+        "@id" : "http://exampleProvider.example.org"
+      } ],
+      "ids:assignee" : [ {
+        "@id" : "www.example.org/YourURI"
+      } ],
+      "ids:action" : [ {
+        "@id" : "idsc:COMPENSATE"
+      } ]
+    } ]
+  } ],
+  "ids:provider" : {
+    "@id" : "http://exampleProvider.example.org"
+  },
+  "ids:contractStart" : {
+    "@value" : "2020-11-15T19:51:38.591+01:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  },
+  "ids:consumer" : {
+    "@id" : "www.example.org/YourURI"
+  }
+}

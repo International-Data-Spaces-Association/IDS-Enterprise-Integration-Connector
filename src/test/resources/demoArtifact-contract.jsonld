@@ -1,0 +1,27 @@
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/"
+  },
+  "@type" : "ids:ContractOffer",
+  "@id" : "https://w3id.org/idsa/autogen/contractOffer/6c2a85c8-9b65-4fad-adf3-5029b7d67814",
+  "ids:permission" : [ {
+    "@type" : "ids:Permission",
+    "@id" : "https://w3id.org/idsa/autogen/permission/8362b2f0-4656-433c-b656-e1e501d50d06",
+    "ids:target" : {
+      "@id" : "https://w3id.org/idsa/autogen/artifact/3e30ae77-048d-4f21-bfab-12dc990d2398"
+    },
+    "ids:action" : [ {
+      "@id" : "idsc:USE"
+    } ],
+    "ids:assigner" : [ {
+      "@id" : "http://example.mobids.de"
+    } ],
+    "ids:assignee" : [ {
+      "@id" : "www.example.org/YourURI"
+    } ]
+  } ],
+  "ids:contractStart" : {
+    "@value" : "2020-10-08T12:55:10.363+02:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  }
+}

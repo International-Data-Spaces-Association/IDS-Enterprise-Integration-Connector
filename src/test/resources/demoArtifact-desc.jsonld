@@ -1,0 +1,21 @@
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/"
+  },
+  "@type" : "ids:Resource",
+  "@id" : "https://w3id.org/idsa/autogen/resource/6ce817f2-c680-4552-8a77-221b8c88ee37",
+  "ids:title" : [ {
+    "@value" : "Test Resource for Connector Testing",
+    "@language" : "en"
+  } ],
+  "ids:defaultRepresentation" : [ {
+    "@type" : "ids:Representation",
+    "@id" : "https://w3id.org/idsa/autogen/representation/e7fdaa92-9353-41be-b351-a36ae37ee32d",
+    "ids:instance" : [ {
+      "@type" : "ids:Artifact",
+      "@id" : "https://w3id.org/idsa/autogen/artifact/7e7a14bb-bde0-4c17-8d01-09e0f39004fc",
+      "ids:fileName" : "demoArtifact.xml",
+      "ids:byteSize" : 0
+    } ]
+  } ]
+}

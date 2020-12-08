@@ -1,0 +1,15 @@
+de.fraunhofer.iais.eis.ids.mdmconnector.acceptancetests
+de.fraunhofer.iais.eis.ids.mdmconnector.artifact
+de.fraunhofer.iais.eis.ids.mdmconnector.artifactdescription
+de.fraunhofer.iais.eis.ids.mdmconnector.builder
+de.fraunhofer.iais.eis.ids.mdmconnector.client.echo
+de.fraunhofer.iais.eis.ids.mdmconnector.components
+de.fraunhofer.iais.eis.ids.mdmconnector.contract
+de.fraunhofer.iais.eis.ids.mdmconnector.daps
+de.fraunhofer.iais.eis.ids.mdmconnector.handlers.contract
+de.fraunhofer.iais.eis.ids.mdmconnector.handlers.standard
+de.fraunhofer.iais.eis.ids.mdmconnector.infomodel
+de.fraunhofer.iais.eis.ids.mdmconnector.infrastructure
+de.fraunhofer.iais.eis.ids.mdmconnector.logging
+de.fraunhofer.iais.eis.ids.mdmconnector.main
+de.fraunhofer.iais.eis.ids.mdmconnector.shared
