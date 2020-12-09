@@ -50,7 +50,7 @@ class AppConfig {
                     dapsInteractionConfig.keyStoreAlias,
                     dapsInteractionConfig.UUID,
                     dapsUrl,
-                    true,
+                    true, //TODO: replace these two boolean parameters by variables. Once there is a DAPS with a proper X.509, this should be set to false
                     true);
             String securityToken = daps.getSecurityToken();
         } catch (InvalidPathException | IOException | TokenRetrievalException e) {
@@ -81,7 +81,7 @@ class AppConfig {
         System.out.print(dapsInteractionConfig.trustedHosts);
 
         if (dapsInteractionConfig.verify) {
-            component.setSecurityTokenVerifier(
+            component.setSecurityTokenVerifier( //TODO: Very recent changes were made here on components side. Please do not provide your own claims verifier, but use the internal one
                     new DapsSecurityTokenVerifier(new JWKSFromIssuer(dapsInteractionConfig.trustedHosts),
                     new JWTClaimsVerifier() {
                         @Override
