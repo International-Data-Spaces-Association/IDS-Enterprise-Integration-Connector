@@ -28,7 +28,7 @@ import javax.validation.constraints.NotNull;
  */
 public class DescriptionRequestHandler implements MessageHandler<DescriptionRequestMAP, DescriptionResponseMAP> {
 
-    private Logger logger = LoggerFactory.getLogger(DescriptionRequestMessageBuilder.class);
+    private Logger logger = LoggerFactory.getLogger(DescriptionRequestHandler.class);
 
     private DynamicConnectorSelfDescription selfDescription;
     private DapsSecurityTokenProvider daps;
@@ -52,8 +52,8 @@ public class DescriptionRequestHandler implements MessageHandler<DescriptionRequ
         loggingInteractor.logMaP((MessageAndPayload) DescriptionRequestMAP);
         //currently it is wrapped inside
         BaseConnector infrastructureComponent = (BaseConnector) selfDescription.getSelfDescription();
-        ResourceCatalog resourceCatalog = infrastructureComponent.getResourceCatalog().get(0);
-        resourceIdInfrastructureComponent = resourceCatalog.getOfferedResource().get(0).getId();
+        ResourceCatalog resourceCatalog = infrastructureComponent.getResourceCatalog().get(0); //Attention. There must always be a catalog, or this will fail
+        resourceIdInfrastructureComponent = resourceCatalog.getOfferedResource().get(0).getId(); //Attention. What if catalog is empty? Exception would be thrown here
         String sampleURIKey = null;
         result = infrastructureComponent.toRdf();
         if (DescriptionRequestMAP.getMessage().getRequestedElement() != null) {
@@ -74,13 +74,14 @@ public class DescriptionRequestHandler implements MessageHandler<DescriptionRequ
             }
             try {
             	String tempVal = resourceCatalog.getId().toString();        
-                if (tempVal.isEmpty()==false && resourceList.size()>0) {
+                if (!tempVal.isEmpty() && resourceList.size()>0) {
                     //fetch response only through resource catalogID
                 	//if asked for resource id
                 	
-                	for (int i = 1; i < resourceList.size(); i++) { 
+                	for (int i = 0; i < resourceList.size(); i++) { 
                 		
-                		//fetch response through resourceId ,but unable to fetch single element!!!!!!!!!!!        		
+                		//fetch response through resourceId ,but unable to fetch single element!!!!!!!!!!!
+                        //TODO: value ignored
                 		result = infrastructureComponent.getResourceCatalog().get(0).getOfferedResource().get(i).toRdf();
                 	}
                 	
@@ -100,8 +101,6 @@ public class DescriptionRequestHandler implements MessageHandler<DescriptionRequ
             }
         }
 
-        //Merge conflict resloved
-
         DescriptionResponseMessage descriptionResponse = null;
         try {
             descriptionResponse = new DescriptionResponseMessageBuilder()
@@ -109,7 +108,7 @@ public class DescriptionRequestHandler implements MessageHandler<DescriptionRequ
                     ._issued_(CalendarUtil.now())
                     ._correlationMessage_(DescriptionRequestMAP.getMessage().getId())
                     ._securityToken_(daps.getSecurityTokenAsDAT())
-                    ._senderAgent_(infrastructureComponent.getCurator())
+                    ._senderAgent_(infrastructureComponent.getCurator()) //It might make sense to change this to a different sender agent
                     ._modelVersion_(infrastructureComponent.getOutboundModelVersion())
                     .build();
             
@@ -127,7 +126,7 @@ public class DescriptionRequestHandler implements MessageHandler<DescriptionRequ
 
         @Override
         public Collection<Class<? extends Message>> getSupportedMessageTypes () {
-            return Arrays.asList(/*SelfDescriptionRequest.class,*/ DescriptionRequestMessage.class);
+            return Arrays.asList(DescriptionRequestMessage.class);
         }
 
 }
