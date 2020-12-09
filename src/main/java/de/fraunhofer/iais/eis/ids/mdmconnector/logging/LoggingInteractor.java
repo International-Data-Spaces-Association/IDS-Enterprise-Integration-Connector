@@ -33,12 +33,12 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class LoggingInteractor {
 
-    final private Logger logger = LoggerFactory.getLogger(DynamicConnectorSelfDescription.class);
+    final private Logger logger = LoggerFactory.getLogger(LoggingInteractor.class);
 
-    private URI loggingIngoing;
-    private URI loggingOutgoing;
-    private boolean ignoreLogging;
-    private DapsSecurityTokenProvider daps;
+    private final URI loggingIngoing;
+    private final URI loggingOutgoing;
+    private final boolean ignoreLogging;
+    private final DapsSecurityTokenProvider daps;
 
     /**
      * Constructor
@@ -104,9 +104,7 @@ public class LoggingInteractor {
                     logger.warn("External Logging Service failed with:" + response.getStatusLine().getStatusCode() + " for Message:" + map.getMessage().toRdf());
                 }
             } catch (Exception e) {
-                logger.warn("External Logging Service Error");
-                e.printStackTrace();
-
+                logger.warn("External Logging Service Error", e);
             }
         }
     }
