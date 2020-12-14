@@ -30,13 +30,13 @@ public class DynamicConnectorSelfDescription implements DynamicArtifactSelfDescr
     final private Logger logger = LoggerFactory.getLogger(DynamicConnectorSelfDescription.class);
 
     @NotNull
-    URI componentId;
+    final URI componentId;
 
-    private URI maintainerId;
-    private String modelVersion;
+    private final URI maintainerId;
+    private final String modelVersion;
     private ArtifactIndex artifacts;
 
-    public DynamicConnectorSelfDescription(@NotNull @NotNull URI component, URI maintainer, String modelVersion) {
+    public DynamicConnectorSelfDescription(@NotNull URI component, URI maintainer, String modelVersion) {
         this.componentId = component;
         this.maintainerId = maintainer;
         this.modelVersion = modelVersion;
@@ -152,9 +152,7 @@ public class DynamicConnectorSelfDescription implements DynamicArtifactSelfDescr
             nonCommercialLicense = new URI("https://creativecommons.org/licenses/by-nc/4.0/legalcode");
             consumer = new URI("http://example.org/you");
         } catch (URISyntaxException e) {
-            System.out.println("Exception in DynamicConnectorSelfDescription");
-            e.printStackTrace();
-            System.out.println(e.toString());
+            logger.warn("Exception in DynamicConnectorSelfDescription", e);
         }
 
         ArrayList<Action> allowedActions = new ArrayList<Action>() {{

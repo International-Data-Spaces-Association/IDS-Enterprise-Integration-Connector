@@ -118,13 +118,11 @@ public class Main implements ComponentInteractorProvider {
         AppConfig appConfig = new AppConfig();
         try {
 
-            System.out.println(dapsTrustedHosts);
             DapsInteractionConfig dapsInteractionConfig = new DapsInteractionConfig(
                     dapsUrl, keyStoreFile, keyStorePwd, keyStoreAlias, dapsUUID, dapsTrustedHosts, dapsVerify);
 
             Properties systemProps = System.getProperties();
             systemProps.put("javax.net.ssl.trustStore", truststore);
-//		    systemProps.put("javax.net.ssl.trustStorePassword","changeit");
             System.setProperties(systemProps);
             systemProps = System.getProperties();
 
@@ -138,11 +136,9 @@ public class Main implements ComponentInteractorProvider {
                         dapsInteractionConfig.keyStoreAlias,
                         dapsInteractionConfig.UUID,
                         dapsUrl,
-                        true,
+                        true, //TODO: These two should be replaced by variables
                         true);
-                String securityToken = daps.getSecurityToken();
-                logger.info("Fetched DAT: ");
-                logger.info(securityToken);
+                daps.getSecurityToken(); //fetching securityToken at start up to reduce latency to first message (token can be re-used, if it is not expired by then)
             } catch (InvalidPathException | IOException | TokenRetrievalException e) {
                 e.printStackTrace();
                 logger.warn("Could not create security token!", e);

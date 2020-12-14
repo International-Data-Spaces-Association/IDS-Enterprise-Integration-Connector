@@ -75,7 +75,7 @@
 		<dependency>
 			<groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
 			<artifactId>validation-serialization-provider</artifactId>
-			<version>4.0.2-SNAPSHOT</version>
+			<version>${ids-serializer.version}</version>
 		</dependency>
 
 
@@ -110,7 +110,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13</version>
+			<version>4.13.1</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -193,11 +193,6 @@
 	</build>
 
 	<repositories>
-		<repository>
-			<id>eis-snapshot-repo</id>
-			<name>maven-snapshots</name>
-			<url>http://maven.iais.fraunhofer.de/artifactory/eis-ids-snapshot</url>
-		</repository>
 		<repository>
 			<id>eis-public-repo</id>
 			<name>maven-public</name>
