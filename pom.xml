@@ -12,7 +12,7 @@
 	<properties>
 		<ids-components.version>4.0.2-SNAPSHOT</ids-components.version>
 		<ids-infomodel.version>4.0.2-SNAPSHOT</ids-infomodel.version>
-		<ids-serializer.version>4.0.2-SNAPSHOT</ids-serializer.version>
+		<ids-serializer.version>4.0.0-SNAPSHOT</ids-serializer.version>
 		<spring.version>5.1.3.RELEASE</spring.version>
 		<spring-boot.version>2.0.6.RELEASE</spring-boot.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,11 +38,6 @@
 		</dependency>
 		<dependency>
 			<groupId>de.fraunhofer.iais.eis.ids</groupId>
-			<artifactId>negotiation-library</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>de.fraunhofer.iais.eis.ids</groupId>
 			<artifactId>protocol</artifactId>
 			<version>${ids-components.version}</version>
 		</dependency>
@@ -50,13 +45,6 @@
 			<groupId>de.fraunhofer.iais.eis.ids</groupId>
 			<artifactId>connector-client</artifactId>
 			<version>${ids-components.version}</version>
-		</dependency>
-
-		<!-- IDS Interaction Lib -->
-		<dependency>
-			<groupId>de.fraunhofer.iais.eis.ids</groupId>
-			<artifactId>interaction-library</artifactId>
-			<version>3.1.1-SNAPSHOT</version>
 		</dependency>
 
 		<!-- IDS Infomodel Java Lib -->
