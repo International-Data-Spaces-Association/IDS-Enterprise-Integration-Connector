@@ -45,7 +45,6 @@ public class ContractAgreementMessageHandler implements MessageHandler<ContractA
 		this.daps =daps ;
 		this.artifactIndex = artifactIndex ;
 		this.contractUtil = new ContractUtil(artifactIndex, infrastructureComponent);
-
 	}
 
 
@@ -54,7 +53,6 @@ public class ContractAgreementMessageHandler implements MessageHandler<ContractA
 	public MessageAndPayload handle(ContractAgreementMAP contractAgreementMAP) throws RejectMessageException {
 
 		try {
-
 			// Interactor with the Negotiation Service App
 			ContractAgreementMessage message = contractAgreementMAP.getMessage();
 			logger.info("Incoming ContractAgreement:");

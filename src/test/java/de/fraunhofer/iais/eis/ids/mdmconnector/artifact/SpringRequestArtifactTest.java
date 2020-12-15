@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.ids.component.ecosystemintegration.daps.DapsSecurityTokenProvider;
+import de.fraunhofer.iais.eis.ids.jsonld.Serializer;
 import de.fraunhofer.iais.eis.ids.mdmconnector.shared.DapsSecurityTokenProviderGenerator;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.jetty.http.MultiPartFormInputStream;
@@ -45,8 +46,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import de.fraunhofer.iais.eis.ids.component.core.util.CalendarUtil;
-import de.fraunhofer.iais.eis.ids.jsonld.Serializer;
+import de.fraunhofer.iais.eis.ids.component.core.util.*;
 import de.fraunhofer.iais.eis.ids.mdmconnector.main.Main;
 
 
@@ -128,17 +128,12 @@ public class SpringRequestArtifactTest {
 		DescriptionRequestMessage sefDescriptionRequestMessage = new DescriptionRequestMessageBuilder(new URI("http://http://example.org/test/message1"))
 				._issued_(CalendarUtil.now())
 				._issuerConnector_(new URI("http://example.org"))
-				._authorizationToken_(new TokenBuilder()
-						._tokenValue_("dummy-token")
-						._tokenFormat_(TokenFormat.JWT)
-						.build())
 				._modelVersion_(modelversion)
 				._senderAgent_(new URI("http://example.org"))
 				._securityToken_(daps.getSecurityTokenAsDAT())
 				._modelVersion_(modelversion)
 				.build();
 
-		logger.info(sefDescriptionRequestMessage.toRdf());
 
 		MockMultipartFile header = new MockMultipartFile("header", null, "application/json", sefDescriptionRequestMessage.toRdf().getBytes());
 		logger.info(sefDescriptionRequestMessage.toRdf());
