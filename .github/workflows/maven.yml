@@ -16,6 +16,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - run:  gpg -d --passphrase  "${{ secrets.PASSPHRASEKEYSTORES" }}" --batch resources/iais3-keystore.jks.asc > resources/iais3-keystore.jks
+    - run:  gpg -d --passphrase  "${{ secrets.PASSPHRASEKEYSTORES" }}" --batch resources/iais3-truststore.jks.asc > resources/iais3-truststore.jks
+
     - name: Set up JDK 1.11
       uses: actions/setup-java@v1
       with:
