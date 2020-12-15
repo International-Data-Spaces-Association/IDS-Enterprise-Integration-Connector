@@ -23,6 +23,7 @@ import de.fraunhofer.iais.eis.ids.component.ecosystemintegration.daps.DapsSecuri
 import de.fraunhofer.iais.eis.ids.jsonld.Serializer;
 import de.fraunhofer.iais.eis.ids.mdmconnector.shared.DapsSecurityTokenProviderGenerator;
 import org.apache.commons.io.IOUtils;
+import org.apache.jena.rdf.listeners.NullListener;
 import org.eclipse.jetty.http.MultiPartFormInputStream;
 import org.junit.After;
 import org.junit.Before;
@@ -181,8 +182,11 @@ public class SpringRequestArtifactTest {
 		String return_payload_string = writer.toString();
 		BaseConnector connectorDescription = serializer.deserialize(return_payload_string, BaseConnectorImpl.class);
 		if (connectorDescription.getResourceCatalog().get(0).getOfferedResource().get(0) != null) {
-            artifactURI = connectorDescription.getResourceCatalog().get(0).getOfferedResource().get(0).getRepresentation().get(0).getInstance().get(0).getId();
-        } else {
+            artifactURI = connectorDescription.getResourceCatalog().get(0).getOfferedResource().get(0).getDefaultRepresentation().get(0).getInstance().get(0).getId();
+			if (artifactDir == null) {
+				artifactURI = connectorDescription.getResourceCatalog().get(0).getOfferedResource().get(0).getRepresentation().get(0).getInstance().get(0).getId();
+			}
+		} else {
         	fail("At least the demoArtifact.xml artifact must be loaded!");
         }
 	} 
