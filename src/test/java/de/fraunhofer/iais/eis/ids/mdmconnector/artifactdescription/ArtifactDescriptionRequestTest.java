@@ -7,22 +7,17 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.net.URI;
-import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 import javax.servlet.http.Part;
 import javax.validation.constraints.NotNull;
-import javax.xml.datatype.Duration;
 
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.ids.component.ecosystemintegration.daps.DapsSecurityTokenProvider;
 import de.fraunhofer.iais.eis.ids.mdmconnector.shared.DapsSecurityTokenProviderGenerator;
-import de.fraunhofer.iais.eis.util.PlainLiteral;
-import de.fraunhofer.iais.eis.util.Util;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.jetty.http.MultiPartFormInputStream;
 import org.junit.After;
@@ -49,7 +44,7 @@ import com.fasterxml.jackson.databind.exc.InvalidTypeIdException;
 
 import de.fraunhofer.iais.eis.ids.component.core.util.CalendarUtil;
 import de.fraunhofer.iais.eis.ids.jsonld.Serializer;
-import de.fraunhofer.iais.eis.ids.mdmconnector.main.Main;
+import de.fraunhofer.iais.eis.ids.connector.main.Main;
 
 
 /**

@@ -1,6 +1,6 @@
 package de.fraunhofer.iais.eis.ids.mdmconnector.daps;
 
-import de.fraunhofer.iais.eis.ids.mdmconnector.main.Main;
+import de.fraunhofer.iais.eis.ids.connector.main.Main;
 import de.fraunhofer.iais.eis.ids.mdmconnector.shared.DapsSecurityTokenProviderGenerator;
 import org.junit.After;
 import org.junit.Before;

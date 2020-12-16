@@ -7,19 +7,13 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 
 import javax.servlet.http.Part;
 import javax.validation.constraints.NotNull;
 
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.ids.component.ecosystemintegration.daps.DapsSecurityTokenProvider;
-import de.fraunhofer.iais.eis.ids.mdmconnector.daps.DapsRetrievalTest;
 import de.fraunhofer.iais.eis.ids.mdmconnector.shared.DapsSecurityTokenProviderGenerator;
 import de.fraunhofer.iais.eis.util.Util;
 import org.apache.commons.io.IOUtils;
@@ -34,7 +28,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -49,10 +42,7 @@ import com.fasterxml.jackson.databind.exc.InvalidTypeIdException;
 
 import de.fraunhofer.iais.eis.ids.component.core.util.CalendarUtil;
 import de.fraunhofer.iais.eis.ids.jsonld.Serializer;
-import de.fraunhofer.iais.eis.ids.mdmconnector.artifact.SpringRequestArtifactTest;
-import de.fraunhofer.iais.eis.ids.mdmconnector.main.Main;
-import de.fraunhofer.iais.eis.util.ConstraintViolationException;
-
+import de.fraunhofer.iais.eis.ids.connector.main.Main;
 
 
 /**
