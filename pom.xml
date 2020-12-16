@@ -139,7 +139,7 @@
 						</goals>
 						<configuration>
 							<mainClass>de.fraunhofer.iais.eis.ids.connector.main.Main</mainClass>
-							<outputDirectory>docker/mdm-connector</outputDirectory>
+							<outputDirectory>docker/default/mdm-connector</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
