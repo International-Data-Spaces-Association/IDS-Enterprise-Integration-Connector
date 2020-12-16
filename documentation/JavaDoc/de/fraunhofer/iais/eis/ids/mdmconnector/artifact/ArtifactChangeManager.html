@@ -116,7 +116,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">de.fraunhofer.iais.eis.ids.mdmconnector.artifact</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">de.fraunhofer.iais.eis.ids.connector.artifact</a></div>
 <h2 title="Class ArtifactChangeManager" class="title">Class ArtifactChangeManager</h2>
 </div>
 <div class="contentContainer">
@@ -124,7 +124,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>de.fraunhofer.iais.eis.ids.mdmconnector.artifact.ArtifactChangeManager</li>
+<li>de.fraunhofer.iais.eis.ids.connector.artifact.ArtifactChangeManager</li>
 </ul>
 </li>
 </ul>
@@ -133,12 +133,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="ArtifactListener.html" title="interface in de.fraunhofer.iais.eis.ids.mdmconnector.artifact">ArtifactListener</a></code></dd>
+<dd><code><a href="ArtifactListener.html" title="interface in de.fraunhofer.iais.eis.ids.connector.artifact">ArtifactListener</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">ArtifactChangeManager</span>
 extends java.lang.Object
-implements <a href="ArtifactListener.html" title="interface in de.fraunhofer.iais.eis.ids.mdmconnector.artifact">ArtifactListener</a></pre>
+implements <a href="ArtifactListener.html" title="interface in de.fraunhofer.iais.eis.ids.connector.artifact">ArtifactListener</a></pre>
 </li>
 </ul>
 </div>
@@ -160,12 +160,12 @@ implements <a href="ArtifactListener.html" title="interface in de.fraunhofer.iai
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private <a href="ArtifactFactory.html" title="class in de.fraunhofer.iais.eis.ids.mdmconnector.artifact">ArtifactFactory</a></code></td>
+<td class="colFirst"><code>private <a href="ArtifactFactory.html" title="class in de.fraunhofer.iais.eis.ids.connector.artifact">ArtifactFactory</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#artifactFactory">artifactFactory</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private <a href="ArtifactIndex.html" title="interface in de.fraunhofer.iais.eis.ids.mdmconnector.artifact">ArtifactIndex</a></code></td>
+<td class="colFirst"><code>private <a href="ArtifactIndex.html" title="interface in de.fraunhofer.iais.eis.ids.connector.artifact">ArtifactIndex</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#artifactIndex">artifactIndex</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -205,7 +205,7 @@ implements <a href="ArtifactListener.html" title="interface in de.fraunhofer.iai
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private <a href="../infrastructure/DynamicArtifactSelfDescriptionProvider.html" title="interface in de.fraunhofer.iais.eis.ids.mdmconnector.infrastructure">DynamicArtifactSelfDescriptionProvider</a></code></td>
+<td class="colFirst"><code>private <a href="../infrastructure/DynamicArtifactSelfDescriptionProvider.html" title="interface in de.fraunhofer.iais.eis.ids.connector.infrastructure">DynamicArtifactSelfDescriptionProvider</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#selfDescription">selfDescription</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -227,9 +227,9 @@ implements <a href="ArtifactListener.html" title="interface in de.fraunhofer.iai
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(de.fraunhofer.iais.eis.ids.component.client.broker.RemoteBroker,de.fraunhofer.iais.eis.ids.mdmconnector.artifact.ArtifactIndex,de.fraunhofer.iais.eis.ids.mdmconnector.infrastructure.DynamicArtifactSelfDescriptionProvider,de.fraunhofer.iais.eis.ids.component.core.SecurityTokenProvider,boolean)">ArtifactChangeManager</a></span>&#8203;(de.fraunhofer.iais.eis.ids.component.client.broker.RemoteBroker&nbsp;remoteBroker,
-                     <a href="ArtifactIndex.html" title="interface in de.fraunhofer.iais.eis.ids.mdmconnector.artifact">ArtifactIndex</a>&nbsp;artifactIndex,
-                     <a href="../infrastructure/DynamicArtifactSelfDescriptionProvider.html" title="interface in de.fraunhofer.iais.eis.ids.mdmconnector.infrastructure">DynamicArtifactSelfDescriptionProvider</a>&nbsp;selfDescription,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(de.fraunhofer.iais.eis.ids.component.client.broker.RemoteBroker,de.fraunhofer.iais.eis.ids.connector.artifact.ArtifactIndex,de.fraunhofer.iais.eis.ids.connector.infrastructure.DynamicArtifactSelfDescriptionProvider,de.fraunhofer.iais.eis.ids.component.core.SecurityTokenProvider,boolean)">ArtifactChangeManager</a></span>&#8203;(de.fraunhofer.iais.eis.ids.component.client.broker.RemoteBroker&nbsp;remoteBroker,
+                     <a href="ArtifactIndex.html" title="interface in de.fraunhofer.iais.eis.ids.connector.artifact">ArtifactIndex</a>&nbsp;artifactIndex,
+                     <a href="../infrastructure/DynamicArtifactSelfDescriptionProvider.html" title="interface in de.fraunhofer.iais.eis.ids.connector.infrastructure">DynamicArtifactSelfDescriptionProvider</a>&nbsp;selfDescription,
                      de.fraunhofer.iais.eis.ids.component.core.SecurityTokenProvider&nbsp;securityTokenProvider,
                      boolean&nbsp;brokerIgnore)</code></th>
 <td class="colLast">&nbsp;</td>
@@ -334,7 +334,7 @@ implements <a href="ArtifactListener.html" title="interface in de.fraunhofer.iai
 <ul class="blockList">
 <li class="blockList">
 <h4>artifactIndex</h4>
-<pre>private&nbsp;<a href="ArtifactIndex.html" title="interface in de.fraunhofer.iais.eis.ids.mdmconnector.artifact">ArtifactIndex</a> artifactIndex</pre>
+<pre>private&nbsp;<a href="ArtifactIndex.html" title="interface in de.fraunhofer.iais.eis.ids.connector.artifact">ArtifactIndex</a> artifactIndex</pre>
 </li>
 </ul>
 <a id="artifactFactory">
@@ -343,7 +343,7 @@ implements <a href="ArtifactListener.html" title="interface in de.fraunhofer.iai
 <ul class="blockList">
 <li class="blockList">
 <h4>artifactFactory</h4>
-<pre>private&nbsp;<a href="ArtifactFactory.html" title="class in de.fraunhofer.iais.eis.ids.mdmconnector.artifact">ArtifactFactory</a> artifactFactory</pre>
+<pre>private&nbsp;<a href="ArtifactFactory.html" title="class in de.fraunhofer.iais.eis.ids.connector.artifact">ArtifactFactory</a> artifactFactory</pre>
 </li>
 </ul>
 <a id="selfDescription">
@@ -352,7 +352,7 @@ implements <a href="ArtifactListener.html" title="interface in de.fraunhofer.iai
 <ul class="blockList">
 <li class="blockList">
 <h4>selfDescription</h4>
-<pre>private&nbsp;<a href="../infrastructure/DynamicArtifactSelfDescriptionProvider.html" title="interface in de.fraunhofer.iais.eis.ids.mdmconnector.infrastructure">DynamicArtifactSelfDescriptionProvider</a> selfDescription</pre>
+<pre>private&nbsp;<a href="../infrastructure/DynamicArtifactSelfDescriptionProvider.html" title="interface in de.fraunhofer.iais.eis.ids.connector.infrastructure">DynamicArtifactSelfDescriptionProvider</a> selfDescription</pre>
 </li>
 </ul>
 <a id="remoteBroker">
@@ -419,15 +419,15 @@ implements <a href="ArtifactListener.html" title="interface in de.fraunhofer.iai
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(de.fraunhofer.iais.eis.ids.component.client.broker.RemoteBroker,de.fraunhofer.iais.eis.ids.mdmconnector.artifact.ArtifactIndex,de.fraunhofer.iais.eis.ids.mdmconnector.infrastructure.DynamicArtifactSelfDescriptionProvider,de.fraunhofer.iais.eis.ids.component.core.SecurityTokenProvider,boolean)">
+<a id="&lt;init&gt;(de.fraunhofer.iais.eis.ids.component.client.broker.RemoteBroker,de.fraunhofer.iais.eis.ids.connector.artifact.ArtifactIndex,de.fraunhofer.iais.eis.ids.connector.infrastructure.DynamicArtifactSelfDescriptionProvider,de.fraunhofer.iais.eis.ids.component.core.SecurityTokenProvider,boolean)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>ArtifactChangeManager</h4>
 <pre>public&nbsp;ArtifactChangeManager&#8203;(de.fraunhofer.iais.eis.ids.component.client.broker.RemoteBroker&nbsp;remoteBroker,
-                             <a href="ArtifactIndex.html" title="interface in de.fraunhofer.iais.eis.ids.mdmconnector.artifact">ArtifactIndex</a>&nbsp;artifactIndex,
-                             <a href="../infrastructure/DynamicArtifactSelfDescriptionProvider.html" title="interface in de.fraunhofer.iais.eis.ids.mdmconnector.infrastructure">DynamicArtifactSelfDescriptionProvider</a>&nbsp;selfDescription,
+                             <a href="ArtifactIndex.html" title="interface in de.fraunhofer.iais.eis.ids.connector.artifact">ArtifactIndex</a>&nbsp;artifactIndex,
+                             <a href="../infrastructure/DynamicArtifactSelfDescriptionProvider.html" title="interface in de.fraunhofer.iais.eis.ids.connector.infrastructure">DynamicArtifactSelfDescriptionProvider</a>&nbsp;selfDescription,
                              de.fraunhofer.iais.eis.ids.component.core.SecurityTokenProvider&nbsp;securityTokenProvider,
                              boolean&nbsp;brokerIgnore)
                       throws de.fraunhofer.iais.eis.ids.component.core.InfomodelFormalException,
@@ -460,7 +460,7 @@ implements <a href="ArtifactListener.html" title="interface in de.fraunhofer.iai
                       java.io.IOException</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="ArtifactListener.html#notifyAdd(java.io.File)">notifyAdd</a></code>&nbsp;in interface&nbsp;<code><a href="ArtifactListener.html" title="interface in de.fraunhofer.iais.eis.ids.mdmconnector.artifact">ArtifactListener</a></code></dd>
+<dd><code><a href="ArtifactListener.html#notifyAdd(java.io.File)">notifyAdd</a></code>&nbsp;in interface&nbsp;<code><a href="ArtifactListener.html" title="interface in de.fraunhofer.iais.eis.ids.connector.artifact">ArtifactListener</a></code></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>de.fraunhofer.iais.eis.ids.component.core.InfomodelFormalException</code></dd>
 <dd><code>java.io.IOException</code></dd>
@@ -541,7 +541,7 @@ implements <a href="ArtifactListener.html" title="interface in de.fraunhofer.iai
                          java.io.IOException</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="ArtifactListener.html#notifyRemove(java.io.File)">notifyRemove</a></code>&nbsp;in interface&nbsp;<code><a href="ArtifactListener.html" title="interface in de.fraunhofer.iais.eis.ids.mdmconnector.artifact">ArtifactListener</a></code></dd>
+<dd><code><a href="ArtifactListener.html#notifyRemove(java.io.File)">notifyRemove</a></code>&nbsp;in interface&nbsp;<code><a href="ArtifactListener.html" title="interface in de.fraunhofer.iais.eis.ids.connector.artifact">ArtifactListener</a></code></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>de.fraunhofer.iais.eis.ids.component.core.InfomodelFormalException</code></dd>
 <dd><code>java.io.IOException</code></dd>
