@@ -38,11 +38,6 @@
 		</dependency>
 		<dependency>
 			<groupId>de.fraunhofer.iais.eis.ids</groupId>
-			<artifactId>negotiation-library</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>de.fraunhofer.iais.eis.ids</groupId>
 			<artifactId>protocol</artifactId>
 			<version>${ids-components.version}</version>
 		</dependency>
@@ -50,13 +45,6 @@
 			<groupId>de.fraunhofer.iais.eis.ids</groupId>
 			<artifactId>connector-client</artifactId>
 			<version>${ids-components.version}</version>
-		</dependency>
-
-		<!-- IDS Interaction Lib -->
-		<dependency>
-			<groupId>de.fraunhofer.iais.eis.ids</groupId>
-			<artifactId>interaction-library</artifactId>
-			<version>3.1.1-SNAPSHOT</version>
 		</dependency>
 
 		<!-- IDS Infomodel Java Lib -->
