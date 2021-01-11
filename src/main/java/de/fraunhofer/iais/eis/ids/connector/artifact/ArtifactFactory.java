@@ -42,7 +42,16 @@ class ArtifactFactory {
                 ._fileName_(file.getName())
                 ._byteSize_(new BigInteger(String.valueOf(fileSize)))
                 .build();
+
+        if (file.getName().endsWith(".api"))
+        {
+           artifact = new ArtifactBuilder(createArtifactUri(file.getName()))
+                    ._creationDate_(greg)
+                    .build();
+        }
+
         return artifact;
+
     }
 
     private URI createArtifactUri(String name) {
