@@ -199,7 +199,7 @@ public class DynamicConnectorSelfDescription implements DynamicArtifactSelfDescr
         // the final contract offer
         URI conURI = null;
         try {
-            conURI = new URI("default.contract");
+            conURI = new URI("http://exampleContract.example.org");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

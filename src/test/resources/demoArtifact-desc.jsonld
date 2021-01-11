@@ -1,21 +1,22 @@
 {
   "@context" : {
-    "ids" : "https://w3id.org/idsa/core/"
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
   },
   "@type" : "ids:Resource",
-  "@id" : "https://w3id.org/idsa/autogen/resource/6ce817f2-c680-4552-8a77-221b8c88ee37",
-  "ids:title" : [ {
-    "@value" : "Test Resource for Connector Testing",
-    "@language" : "en"
+  "@id" : "https://w3id.org/idsa/autogen/resource/2150439e-0b26-47c0-8b07-677f3a0674a7",
+  "ids:language" : [ {
+    "@id" : "idsc:DE"
   } ],
-  "ids:defaultRepresentation" : [ {
-    "@type" : "ids:Representation",
-    "@id" : "https://w3id.org/idsa/autogen/representation/e7fdaa92-9353-41be-b351-a36ae37ee32d",
-    "ids:instance" : [ {
-      "@type" : "ids:Artifact",
-      "@id" : "https://w3id.org/idsa/autogen/artifact/7e7a14bb-bde0-4c17-8d01-09e0f39004fc",
-      "ids:fileName" : "demoArtifact.xml",
-      "ids:byteSize" : 0
-    } ]
-  } ]
+  "ids:description" : [ {
+    "@value" : "Example Description for Unit Tests",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:title" : [ {
+    "@value" : "Example Description",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:contentType" : {
+    "@id" : "idsc:SCHEMA_DEFINITION"
+  }
 }

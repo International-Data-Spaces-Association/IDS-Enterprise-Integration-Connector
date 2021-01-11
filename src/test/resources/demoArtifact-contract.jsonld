@@ -1,27 +1,50 @@
 {
   "@context" : {
-    "ids" : "https://w3id.org/idsa/core/"
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
   },
   "@type" : "ids:ContractOffer",
-  "@id" : "https://w3id.org/idsa/autogen/contractOffer/6c2a85c8-9b65-4fad-adf3-5029b7d67814",
+  "@id" : "https://w3id.org/idsa/autogen/contractOffer/58c25f59-ccda-447f-82db-901da4a7d7fd",
   "ids:permission" : [ {
     "@type" : "ids:Permission",
-    "@id" : "https://w3id.org/idsa/autogen/permission/8362b2f0-4656-433c-b656-e1e501d50d06",
+    "@id" : "https://w3id.org/idsa/autogen/permission/e6edc091-6acb-47c2-9432-d10984c7288e",
     "ids:target" : {
-      "@id" : "https://w3id.org/idsa/autogen/artifact/3e30ae77-048d-4f21-bfab-12dc990d2398"
+      "@id" : "https://w3id.org/idsa/autogen/artifact/e4248fd0-c609-4421-b541-ca81125a2dfe"
     },
+    "ids:postDuty" : [ {
+      "@type" : "ids:Duty",
+      "@id" : "https://w3id.org/idsa/autogen/duty/46d353dd-ba56-433e-a02f-7de132fb6325",
+      "ids:action" : [ {
+        "@id" : "idsc:ANONYMIZE"
+      } ],
+      "ids:constraint" : [ {
+        "@type" : "ids:Constraint",
+        "@id" : "https://w3id.org/idsa/autogen/constraint/039d81ca-d15f-41c7-802f-021ddb2faf27",
+        "ids:leftOperand" : {
+          "@id" : "idsc:ABSOLUTE_SPATIAL_POSITION"
+        },
+        "ids:operator" : {
+          "@id" : "idsc:INSIDE"
+        },
+        "ids:rightOperandReference" : {
+          "@id" : "https://www.wikidata.org/wiki/Q3308569"
+        }
+      } ]
+    } ],
     "ids:action" : [ {
       "@id" : "idsc:USE"
     } ],
     "ids:assigner" : [ {
-      "@id" : "http://example.mobids.de"
+      "@id" : "http://iais.fraunhofer.de"
     } ],
     "ids:assignee" : [ {
       "@id" : "www.example.org/YourURI"
     } ]
   } ],
-  "ids:contractStart" : {
-    "@value" : "2020-10-08T12:55:10.363+02:00",
-    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  "ids:provider" : {
+    "@id" : "http://iais.fraunhofer.de"
+  },
+  "ids:consumer" : {
+    "@id" : "www.example.org/YourURI"
   }
 }

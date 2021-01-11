@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.ids.component.ecosystemintegration.daps.DapsSecurityTokenProvider;
 import de.fraunhofer.iais.eis.ids.jsonld.Serializer;
-import de.fraunhofer.iais.eis.ids.mdmconnector.shared.DapsSecurityTokenProviderGenerator;
+import de.fraunhofer.iais.eis.ids.connector.shared.DapsSecurityTokenProviderGenerator;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.jetty.http.MultiPartFormInputStream;
 import org.junit.After;
@@ -73,6 +73,8 @@ public class SpringRequestArtifactTest {
 	private @NotNull URI artifactURI;
 
     private final static String ARTIFACT_FILENAME = "demoArtifact.xml";
+	private final static String ARTIFACT_DESC= "demoArtifact-desc.jsonld";
+	private final static String ARTIFACT_CONT = "demoArtifact-contract.jsonld";
 
     @Value("${artifact.directory}")
     private String artifactDir;
@@ -109,20 +111,28 @@ public class SpringRequestArtifactTest {
     public void cleanUp() {
         Path artifactFile = Paths.get(artifactDir, ARTIFACT_FILENAME);
         artifactFile.toFile().delete();
-    }
+		artifactFile = Paths.get(artifactDir, ARTIFACT_DESC);
+		artifactFile.toFile().delete();
+		artifactFile = Paths.get(artifactDir, ARTIFACT_CONT);
+		artifactFile.toFile().delete();
+	}
     
 
     
     private void prepareArtifact() throws IOException {
         InputStream artifact = this.getClass().getClassLoader().getResourceAsStream(ARTIFACT_FILENAME);
         Files.copy(artifact, Paths.get(artifactDir, ARTIFACT_FILENAME).normalize());
+		InputStream artifactdesc = this.getClass().getClassLoader().getResourceAsStream(ARTIFACT_DESC);
+		Files.copy(artifactdesc, Paths.get(artifactDir, ARTIFACT_DESC).normalize());
+		InputStream artifactcont = this.getClass().getClassLoader().getResourceAsStream(ARTIFACT_CONT);
+		Files.copy(artifactcont, Paths.get(artifactDir, ARTIFACT_CONT).normalize());
     }
 
 
 
 	public void getSelfDescriptionTestAndGetArtifactUri() throws Exception {
 		DapsSecurityTokenProvider daps	= DapsSecurityTokenProviderGenerator.generate(dapsUrl,keyStoreFile,keyStorePwd,keyStoreAlias,dapsUUID);
-		DescriptionRequestMessage sefDescriptionRequestMessage = new DescriptionRequestMessageBuilder(new URI("http://http://example.org/test/message1"))
+		DescriptionRequestMessage sefDescriptionRequestMessage = new DescriptionRequestMessageBuilder(new URI("http://example.org/test/message1"))
 				._issued_(CalendarUtil.now())
 				._issuerConnector_(new URI("http://example.org"))
 				._modelVersion_(modelversion)
@@ -159,24 +169,13 @@ public class SpringRequestArtifactTest {
 		writer.close();
 		String return_header_string = writer.toString();
 		DescriptionResponseMessage connectorDescriptionMsg = serializer.deserialize(return_header_string, DescriptionResponseMessage.class);
-		assertEquals(0, connectorDescriptionMsg.getCorrelationMessage().compareTo(new URI("http://http://example.org/test/message1")) );
-
-		// Test the IDS message header
-		serializer = new Serializer();
-		writer = new StringWriter();
-		IOUtils.copy(return_header.getInputStream(), writer, Charset.defaultCharset());
-		writer.close();
-
-		return_header_string = writer.toString();
-		connectorDescriptionMsg = serializer.deserialize(return_header_string, DescriptionResponseMessage.class);
-
-		//assertEquals(true, connectorDescriptionMsg.getCorrelationMessage().equals(new URL("http://http://example.org/test/message1")) );
+		assertEquals(0, connectorDescriptionMsg.getCorrelationMessage().compareTo(new URI("http://example.org/test/message1")) );
 
 		// Test the IDS message payload
 		writer = new StringWriter();
 		IOUtils.copy(return_payload.getInputStream(), writer, Charset.defaultCharset());
 		String return_payload_string = writer.toString();
-		BaseConnector connectorDescription = serializer.deserialize(return_payload_string, BaseConnectorImpl.class);
+		BaseConnector connectorDescription = serializer.deserialize(return_payload_string, BaseConnector.class);
 		if (connectorDescription.getResourceCatalog().get(0).getOfferedResource().get(0) != null) {
             try {
 				artifactURI = connectorDescription.getResourceCatalog().get(0).getOfferedResource().get(0).getDefaultRepresentation().get(0).getInstance().get(0).getId();
@@ -187,6 +186,8 @@ public class SpringRequestArtifactTest {
 		} else {
         	fail("At least the demoArtifact.xml artifact must be loaded!");
         }
+
+
 	} 
 
 

@@ -1,4 +1,4 @@
-package de.fraunhofer.iais.eis.ids.mdmconnector.artifactdescription;
+package de.fraunhofer.iais.eis.ids.connector.artifactdescription;
 
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.ids.component.ecosystemintegration.daps.DapsSecurityTokenProvider;
-import de.fraunhofer.iais.eis.ids.mdmconnector.shared.DapsSecurityTokenProviderGenerator;
+import de.fraunhofer.iais.eis.ids.connector.shared.DapsSecurityTokenProviderGenerator;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.jetty.http.MultiPartFormInputStream;
 import org.junit.After;

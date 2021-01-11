@@ -1,4 +1,4 @@
-package de.fraunhofer.iais.eis.ids.mdmconnector.client.echo;
+package de.fraunhofer.iais.eis.ids.connector.client.echo;
 
 import java.io.IOException;
 import java.net.URI;

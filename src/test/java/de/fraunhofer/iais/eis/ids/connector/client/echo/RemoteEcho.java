@@ -1,9 +1,8 @@
-package de.fraunhofer.iais.eis.ids.mdmconnector.client.echo;
+package de.fraunhofer.iais.eis.ids.connector.client.echo;
 
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.ids.component.client.HTTPMultipartComponentInteractor;
 import de.fraunhofer.iais.eis.ids.component.core.MessageAndPayload;
-import de.fraunhofer.iais.eis.ids.component.core.map.DefaultSuccessMAP;
 import de.fraunhofer.iais.eis.ids.component.core.util.CalendarUtil;
 import de.fraunhofer.iais.eis.ids.component.core.RequestType;
 import de.fraunhofer.iais.eis.ids.connector.commons.artifact.map.ArtifactRequestMAP;
@@ -16,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 public class RemoteEcho {
 

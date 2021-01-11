@@ -1,4 +1,4 @@
-package de.fraunhofer.iais.eis.ids.mdmconnector.acceptancetests;
+package de.fraunhofer.iais.eis.ids.connector.acceptancetests;
 
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.ids.component.core.TokenRetrievalException;
@@ -6,7 +6,7 @@ import de.fraunhofer.iais.eis.ids.component.core.util.CalendarUtil;
 import de.fraunhofer.iais.eis.ids.component.ecosystemintegration.daps.DapsSecurityTokenProvider;
 import de.fraunhofer.iais.eis.ids.jsonld.Serializer;
 import de.fraunhofer.iais.eis.ids.connector.main.Main;
-import de.fraunhofer.iais.eis.ids.mdmconnector.shared.DapsSecurityTokenProviderGenerator;
+import de.fraunhofer.iais.eis.ids.connector.shared.DapsSecurityTokenProviderGenerator;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -114,8 +114,8 @@ public class RetrieveArtifactTest {
         artifactFile.toFile().delete();
         Path artifactFileDesc = Paths.get(artifactDir, ARTIFACT_DESCRIPTION_FILENAME);
         artifactFileDesc.toFile().delete();
-        Path artifactFileOff = Paths.get(artifactDir, ARTIFACT_OFFER_FILENAME);
-        artifactFileOff.toFile().delete();
+       // Path artifactFileOff = Paths.get(artifactDir, ARTIFACT_OFFER_FILENAME);
+        // artifactFileOff.toFile().delete();
     }
 
     @Test
@@ -140,7 +140,7 @@ public class RetrieveArtifactTest {
             InputStream artifactdesc = this.getClass().getClassLoader().getResourceAsStream(ARTIFACT_DESCRIPTION_FILENAME);
             InputStream artifactoff = this.getClass().getClassLoader().getResourceAsStream(ARTIFACT_OFFER_FILENAME);
             Files.copy(artifact, Paths.get(artifactDir, ARTIFACT_FILENAME).normalize());
-            Files.copy(artifactoff, Paths.get(artifactDir, ARTIFACT_OFFER_FILENAME).normalize());
+           // Files.copy(artifactoff, Paths.get(artifactDir, ARTIFACT_OFFER_FILENAME).normalize());
             Files.copy(artifactdesc, Paths.get(artifactDir, ARTIFACT_DESCRIPTION_FILENAME).normalize());
         }
         catch (Exception e){
