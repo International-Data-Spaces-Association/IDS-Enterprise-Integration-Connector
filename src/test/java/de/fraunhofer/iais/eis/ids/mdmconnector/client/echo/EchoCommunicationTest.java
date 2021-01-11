@@ -1,27 +1,19 @@
 package de.fraunhofer.iais.eis.ids.mdmconnector.client.echo;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import de.fraunhofer.iais.eis.ids.component.client.HTTPMultipartComponentInteractor;
-import de.fraunhofer.iais.eis.ids.component.core.InfomodelFormalException;
-import de.fraunhofer.iais.eis.ids.mdmconnector.infrastructure.DynamicConnectorSelfDescription;
+import de.fraunhofer.iais.eis.ids.connector.infrastructure.DynamicConnectorSelfDescription;
 
 
 public class EchoCommunicationTest {
