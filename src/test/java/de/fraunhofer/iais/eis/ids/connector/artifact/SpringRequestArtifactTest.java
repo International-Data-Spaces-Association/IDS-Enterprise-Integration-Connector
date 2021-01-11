@@ -178,9 +178,11 @@ public class SpringRequestArtifactTest {
 		String return_payload_string = writer.toString();
 		BaseConnector connectorDescription = serializer.deserialize(return_payload_string, BaseConnectorImpl.class);
 		if (connectorDescription.getResourceCatalog().get(0).getOfferedResource().get(0) != null) {
-            artifactURI = connectorDescription.getResourceCatalog().get(0).getOfferedResource().get(0).getDefaultRepresentation().get(0).getInstance().get(0).getId();
-			if (artifactDir == null) {
-				artifactURI = connectorDescription.getResourceCatalog().get(0).getOfferedResource().get(0).getRepresentation().get(0).getInstance().get(0).getId();
+            try {
+				artifactURI = connectorDescription.getResourceCatalog().get(0).getOfferedResource().get(0).getDefaultRepresentation().get(0).getInstance().get(0).getId();
+			}
+			catch (NullPointerException e) {
+            	artifactURI = connectorDescription.getResourceCatalog().get(0).getOfferedResource().get(0).getRepresentation().get(0).getInstance().get(0).getId();
 			}
 		} else {
         	fail("At least the demoArtifact.xml artifact must be loaded!");
