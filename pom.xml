@@ -122,15 +122,6 @@
 
 	<build>
 
-                <!-- Including the LICENSE file -->
-                <resources>
-                    <resource>
-                        <directory>.</directory>
-                        <includes>
-                            <include>LICENSE</include>
-                        </includes>
-                    </resource>
-                </resources>
 
 		<plugins>
 			<plugin>
