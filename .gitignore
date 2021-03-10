@@ -7,3 +7,6 @@ mdm-connector.iml
 .idea/*
 
 target/*
+
+*.crt
+*.key
