@@ -97,6 +97,9 @@ public class Main implements ComponentInteractorProvider {
     @Value("${logging.outgoing}")
     private String loggingOut;
 
+    @Value("${jwks.trustedHosts}")
+    private Collection<String> trustedJwksHosts;
+
     @Value("${broker.ignore}")
     private boolean brokerIgnore = false;
 
@@ -163,7 +166,8 @@ public class Main implements ComponentInteractorProvider {
                     selfDescriptionProvider,
                     new URI(participantString),
                     dapsInteractionConfig,
-                    remoteBrokerLogging, watcher, negotiationServiceURL, loggingInteractor, brokerIgnore);
+                    remoteBrokerLogging, watcher, negotiationServiceURL, loggingInteractor,
+                    trustedJwksHosts, brokerIgnore);
 
             multipartComponentInteractor = new MultipartComponentInteractor(component, daps, selfDescriptionProvider.getSelfDescription().getId(), false);
 

@@ -30,6 +30,11 @@ public class DirectoryWatcherTest {
         }
 
         @Override
+        public void notifyChange(File artifact) {
+
+        }
+
+        @Override
         public void notifyRemove(File artifact) {
             removedFiles.add(artifact.getName());
         }

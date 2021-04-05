@@ -24,6 +24,7 @@ public class DirectoryWatcher implements Runnable {
         Path path = createDirIfNotExists(watchDirectory);
         path.register(watchService,
                 StandardWatchEventKinds.ENTRY_CREATE,
+                StandardWatchEventKinds.ENTRY_MODIFY,
                 StandardWatchEventKinds.ENTRY_DELETE);
 
         logger.info("Watching directory '" + watchDirectory + "' for artifacts.");
@@ -39,7 +40,8 @@ public class DirectoryWatcher implements Runnable {
     public void run() {
         WatchKey key;
         try {
-            while ((key = watchService.take()) != null) {
+            while (true) {
+                key = this.watchService.take();
                 for (WatchEvent<?> event : key.pollEvents()) {
                     File affectedFile = new File(watchDirectory + File.separator + event.context());
                     if (event.kind().equals(StandardWatchEventKinds.ENTRY_CREATE) && affectedFile.isFile()) {
@@ -47,24 +49,37 @@ public class DirectoryWatcher implements Runnable {
                             try {
                                 listener.notifyAdd(affectedFile);
                             } catch (InfomodelFormalException | IOException e) {
+                                logger.error("Could not add new artifact information at broker.", e);
+                                //e.printStackTrace();
+                            }
+                        });
+                    }
+                    else if (event.kind().equals(StandardWatchEventKinds.ENTRY_MODIFY) && affectedFile.isFile()) {
+                        listeners.forEach(listener -> {
+                            try {
+                                listener.notifyChange(affectedFile);
+                            } catch (InfomodelFormalException | IOException e) {
                                 logger.error("Could not update new artifact information at broker.", e);
                                 //e.printStackTrace();
                             }
                         });
-                    } else {
-                        if (event.kind().equals(StandardWatchEventKinds.ENTRY_DELETE)) {
+                    }
+                    else if (event.kind().equals(StandardWatchEventKinds.ENTRY_DELETE)) {
                             listeners.forEach(listener -> {
                                 try {
                                     listener.notifyRemove(affectedFile);
                                 } catch (InfomodelFormalException | IOException e) {
-                                    logger.error("Could not update new artifact information at broker.", e);
+                                    logger.error("Could not delete artifact information at broker.", e);
                                     //e.printStackTrace();
                                 }
                             });
                         }
-                    }
+
                 }
-                key.reset();
+                boolean valid = key.reset();
+                if (!valid){
+                    break;
+                }
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
