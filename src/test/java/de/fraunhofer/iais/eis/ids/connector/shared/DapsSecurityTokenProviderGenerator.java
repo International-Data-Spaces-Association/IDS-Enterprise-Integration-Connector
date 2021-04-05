@@ -1,4 +1,4 @@
-package de.fraunhofer.iais.eis.ids.mdmconnector.shared;
+package de.fraunhofer.iais.eis.ids.connector.shared;
 
 import de.fraunhofer.iais.eis.ids.component.core.TokenRetrievalException;
 import de.fraunhofer.iais.eis.ids.component.ecosystemintegration.daps.DapsSecurityTokenProvider;

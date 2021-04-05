@@ -1,4 +1,4 @@
-package de.fraunhofer.iais.eis.ids.mdmconnector.infomodel;
+package de.fraunhofer.iais.eis.ids.connector.infomodel;
 
 import de.fraunhofer.iais.eis.ArtifactRequestMessage;
 import de.fraunhofer.iais.eis.Message;

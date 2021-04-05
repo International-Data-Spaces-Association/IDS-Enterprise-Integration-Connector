@@ -5,16 +5,15 @@
 
 	<groupId>de.fraunhofer.iais.eis.ids</groupId>
 	<artifactId>mdm-connector</artifactId>
-	<version>4.0.2-SNAPSHOT</version>
+	<version>4.0.3-SNAPSHOT</version>
 
 	<modelVersion>4.0.0</modelVersion>
 
 	<properties>
-		<ids-components.version>4.0.2-SNAPSHOT</ids-components.version>
-		<ids-infomodel.version>4.0.2-SNAPSHOT</ids-infomodel.version>
-		<ids-serializer.version>4.0.2-SNAPSHOT</ids-serializer.version>
-		<spring.version>5.1.3.RELEASE</spring.version>
-		<spring-boot.version>2.0.6.RELEASE</spring-boot.version>
+		<ids-components.version>4.0.3-SNAPSHOT</ids-components.version>
+		<ids-infomodel.version>4.0.3-SNAPSHOT</ids-infomodel.version>
+		<ids-serializer.version>4.0.3-SNAPSHOT</ids-serializer.version>
+		<spring-boot.version>2.1.16.RELEASE</spring-boot.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-boot.run.main-class>de.fraunhofer.iais.eis.ids.connector.main.Main</spring-boot.run.main-class>
 	</properties>
@@ -72,20 +71,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<version>${spring-boot.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>9.4.29.v20200521</version>
-		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -127,6 +121,8 @@
 	</reporting>
 
 	<build>
+
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -147,6 +143,8 @@
 						<goals>
 							<goal>repackage</goal>
 						</goals>
+
+
 						<configuration>
 							<mainClass>de.fraunhofer.iais.eis.ids.connector.main.Main</mainClass>
 							<outputDirectory>docker/mdm-connector</outputDirectory>

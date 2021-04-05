@@ -44,8 +44,13 @@ public class DynamicConnectorSelfDescription implements DynamicArtifactSelfDescr
     @Override
     public synchronized InfrastructureComponent getSelfDescription() throws InfomodelFormalException {
 
-        ResourceCatalog catalog = new ResourceCatalogBuilder()
-                ._offeredResource_(createResources()).build();
+        ResourceCatalog catalog = null;
+        try {
+            catalog = new ResourceCatalogBuilder(new URI(componentId+"/ResourceCatalog1"))
+                    ._offeredResource_(createResources()).build();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
 //        AuditGuarantee autitAuditLoggingGuarantee;
 //        AuthenticationGuarantee authenticationGuarantee;
@@ -77,7 +82,7 @@ public class DynamicConnectorSelfDescription implements DynamicArtifactSelfDescr
                 .build();
     }
 
-    private ArrayList<Resource> createResources() {
+    private ArrayList<Resource> createResources() throws URISyntaxException {
         ArrayList<Resource> resources = new ArrayList<>();
 
         if (artifacts != null)
@@ -93,7 +98,7 @@ public class DynamicConnectorSelfDescription implements DynamicArtifactSelfDescr
                 Contract contract = artifacts.getContract(artifact);
 
                 if (description == null) {
-                    description = new ResourceBuilder()
+                    description = new ResourceBuilder(new URI(componentId + "/ResourceCatalog1"))
                             ._representation_(Util.asList(createRepresentation(artifact)))
                             .build();
                 }
@@ -116,9 +121,9 @@ public class DynamicConnectorSelfDescription implements DynamicArtifactSelfDescr
         if (resources.isEmpty()) {
 
             try {
-                ArtifactBuilder artifactBuilder = new ArtifactBuilder(new URI("https://w3id.org/idsa/autogen/artifact/7e7a14bb-bde0-4c17-8d01-09e0f39004fc"));
+                ArtifactBuilder artifactBuilder = new ArtifactBuilder(new URI(componentId+"/ExampleArtifact"));
 
-                DataResourceBuilder resourceBuilder = new DataResourceBuilder()
+                DataResourceBuilder resourceBuilder = new DataResourceBuilder(new URI(componentId+"/ExampleDataResource"))
                         ._representation_(Util.asList(createRepresentation(artifactBuilder.build())));
 
                 ArrayList<ContractOffer> offers = new ArrayList<ContractOffer>();
@@ -194,7 +199,7 @@ public class DynamicConnectorSelfDescription implements DynamicArtifactSelfDescr
         // the final contract offer
         URI conURI = null;
         try {
-            conURI = new URI("default.contract");
+            conURI = new URI("http://exampleContract.example.org");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

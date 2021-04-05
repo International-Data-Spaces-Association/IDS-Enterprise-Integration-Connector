@@ -1,4 +1,4 @@
-package de.fraunhofer.iais.eis.ids.mdmconnector.acceptancetests;
+package de.fraunhofer.iais.eis.ids.connector.acceptancetests;
 import static org.junit.Assert.*;
 
 import java.io.BufferedReader;

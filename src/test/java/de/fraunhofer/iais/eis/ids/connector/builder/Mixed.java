@@ -1,4 +1,4 @@
-package de.fraunhofer.iais.eis.ids.mdmconnector.builder;
+package de.fraunhofer.iais.eis.ids.connector.builder;
 
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.ids.component.core.util.CalendarUtil;
