@@ -40,6 +40,7 @@ public class DirectoryWatcher implements Runnable {
     public void run() {
         WatchKey key;
         try {
+            // runs until the program is shut down or access to the folder is revoked
             while (true) {
                 key = this.watchService.take();
                 for (WatchEvent<?> event : key.pollEvents()) {
@@ -76,7 +77,7 @@ public class DirectoryWatcher implements Runnable {
                         }
 
                 }
-                boolean valid = key.reset();
+                boolean valid = key.reset(); //Checks the validity of the Key in case the system permits access.
                 if (!valid){
                     break;
                 }
