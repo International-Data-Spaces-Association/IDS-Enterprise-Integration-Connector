@@ -364,6 +364,12 @@ public class ArtifactChangeManager implements ArtifactListener {
         return contract;
     }
 
+    @Override
+    public void notifyChange(File file) throws InfomodelFormalException, IOException {
+        notifyRemove(file);
+        notifyAdd(file);
+    }
+
 
     @Override
     public void notifyRemove(File file) throws InfomodelFormalException, IOException {

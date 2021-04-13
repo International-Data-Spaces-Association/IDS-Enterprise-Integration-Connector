@@ -25,6 +25,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 
 class AppConfig {
@@ -39,7 +40,8 @@ class AppConfig {
                                     DirectoryWatcher watcher,
                                     String negotiationServiceURL,
                                     LoggingInteractor logging,
-                                    boolean brokerIgnore) throws InfomodelFormalException, URISyntaxException {
+                                    Collection<String> trustedJwksHosts,
+    boolean brokerIgnore) throws InfomodelFormalException, URISyntaxException {
 
         try {
             //InputStream keystore = getClass().getClassLoader().getResourceAsStream(dapsInteractionConfig.keyStoreFile);
@@ -69,7 +71,7 @@ class AppConfig {
         ContractOfferMessageHandler contractOfferHandler = new ContractOfferMessageHandler(selfDescriptionProvider.getSelfDescription(), participant);
         ContractRequestMessageHandler contractRequestHandler = new ContractRequestMessageHandler(selfDescriptionProvider.getSelfDescription(), daps, artifactIndex);
         ContractAgreementMessageHandler contractAgreementHandler = new ContractAgreementMessageHandler(selfDescriptionProvider.getSelfDescription(), daps, artifactIndex);
-        DescriptionRequestHandler selfDescriptionRequestHandler = new DescriptionRequestHandler(selfDescriptionProvider,  daps,logging);
+        DescriptionRequestHandler selfDescriptionRequestHandler = new DescriptionRequestHandler(selfDescriptionProvider, daps, logging);
         DefaultComponent component = new DefaultComponent(selfDescriptionProvider, daps, selfDescriptionProvider.getSelfDescription().getId(), true);
         //ContractComponent component = new ContractComponent(selfDescriptionProvider);
 
@@ -81,16 +83,9 @@ class AppConfig {
         System.out.print(dapsInteractionConfig.trustedHosts);
 
         if (dapsInteractionConfig.verify) {
-            component.setSecurityTokenVerifier( //TODO: Very recent changes were made here on components side. Please do not provide your own claims verifier, but use the internal one
-                    new DapsSecurityTokenVerifier(new JWKSFromIssuer(dapsInteractionConfig.trustedHosts),
-                    new JWTClaimsVerifier() {
-                        @Override
-                        public void verify(Map<String, Object> map) throws TokenVerificationException {
-                            System.out.println("verified");
-                        }
-                    }));
-        }
 
+            component.setSecurityTokenVerifier(new DapsSecurityTokenVerifier(new JWKSFromIssuer(trustedJwksHosts)));
+        }
 
 
         return component;

@@ -11,4 +11,7 @@ public interface ArtifactListener {
 
     void notifyRemove(File artifact) throws InfomodelFormalException, IOException;
 
+    void notifyChange(File artifact) throws InfomodelFormalException, IOException;
+
+
 }
