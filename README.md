@@ -91,6 +91,32 @@ A Reverse Proxy is used to handle all incoming messages. It provides two HTTPS s
 The MDM Connector code heavily relies on the IDS Components (IAIS git, for access ask [Sebastian Bader](mailto:sebastian.bader@iais.fraunhofer.de)). Custom MessageHandler for any IDS Message can be added and registered in the AppConfig class. Properties, for instance URLs of IDS infrastructure components, are inserted in the applications.properties file.
 
 
+### Artifact Change Manager
+
+### Directory Watcher
+
+### Contract Util
+
+### RemoteBrokerLogging
+
+### Handlers
+#### ArtifactWithContractHandler
+
+#### ContractAgreementMessageHandler
+
+#### ContractOfferMessageHandler
+
+#### ContractRequestMessageHandler
+
+#### DescriptionRequestMessageHandler
+
+### DynamicConnectorSelfDescription
+
+### LoggingInteractor
+
+### AppConfig
+### LocalConnectorConfig
+
 ## App Integrations
 ### SFTP
 The SFTP Integration is based on a seperate Docker Container.
@@ -176,9 +202,6 @@ Releases conform to the major and minor IDS Information Model versions.
 1.0.1   
 - Detect artifacts automatically on startup
 - Register at a Broker on startup
-
-
-
 
 
 ## Contributors (Fraunhofer IAIS)
