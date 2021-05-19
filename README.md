@@ -121,7 +121,7 @@ ArtifactIndex provides all the required functions for Artifacts, Contracts, Nego
 Handles the incoming request for the artifact provides the requested artifact. Contract information is fetched from the requested artifact. The generation of artifact response is dependent on whether the request has a valid contract or not. If artifact has a contract attached with it, then a Contract Agreement is looked upon further. 
 
 #### ContractAgreementMessageHandler
-Checks whether a ContractAgreement is acceptable or should be rejected. Interacts with Negotiations Service application. (Need more information on Negotiation Service??) . Check if the incoming requested Contract agreement and its sender(consumer) follow the contract offer standards mentioned in ContractUtil (as explained above).
+Checks whether a ContractAgreement is acceptable or should be rejected. Check if the incoming requested Contract agreement and its sender(consumer) follow the contract offer standards mentioned in ContractUtil (as explained above).
 
 #### ContractOfferMessageHandler
 This class rejects ContractOfferMAP.
