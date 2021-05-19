@@ -320,7 +320,7 @@ public class RetrieveArtifactTest {
     public void artifactRemoved() throws Exception {
         String SelfDescription = retrieveLocalSelfDescription();
     	System.out.println(SelfDescription);
-        boolean exists = false;
+        boolean exists = SelfDescription.contains("ARTIFACT_FILENAME");
     	if(exists==true) {
     		 Assert.assertTrue("File still exists",false );
     	}
