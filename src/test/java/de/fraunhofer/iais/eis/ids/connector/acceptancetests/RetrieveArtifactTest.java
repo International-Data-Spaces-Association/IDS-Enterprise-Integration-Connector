@@ -15,6 +15,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -33,6 +34,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -40,6 +42,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -86,6 +89,9 @@ public class RetrieveArtifactTest {
 
     @Value("${artifact.directory}")
     private String artifactDir;
+    
+    @Value("${artifact.directory.up}")
+    private String artifactDirUpFolder;
 
     @Value("${daps.url}")
     private String dapsUrl;
@@ -128,25 +134,41 @@ public class RetrieveArtifactTest {
         Message message = createArtifactRequest(artifactUri.get());
         String response = sendArtifactRequest(message);
         Path file = Paths.get(artifactDir, ARTIFACT_FILENAME);
-
-
         Assert.assertTrue(responseContains(response, Files.readAllBytes(file)));
+        removeArtifact();
 
     }
-
+    
+   
+    //Creating multiple artifiacts DONOT DLETE the file but not considered as artifact, and so it has to be deleted from artifact directory
     private void prepareArtifact() throws IOException {
         try {
             InputStream artifact = this.getClass().getClassLoader().getResourceAsStream(ARTIFACT_FILENAME);
             InputStream artifactdesc = this.getClass().getClassLoader().getResourceAsStream(ARTIFACT_DESCRIPTION_FILENAME);
             InputStream artifactoff = this.getClass().getClassLoader().getResourceAsStream(ARTIFACT_OFFER_FILENAME);
             Files.copy(artifact, Paths.get(artifactDir, ARTIFACT_FILENAME).normalize());
-           // Files.copy(artifactoff, Paths.get(artifactDir, ARTIFACT_OFFER_FILENAME).normalize());
+            //Files.copy(artifactoff, Paths.get(artifactDir, ARTIFACT_OFFER_FILENAME).normalize());
             Files.copy(artifactdesc, Paths.get(artifactDir, ARTIFACT_DESCRIPTION_FILENAME).normalize());
         }
         catch (Exception e){
             throw(e);
         }
     }
+    //3.Deleting the resource
+    //Here we want to move the given artifact file which is considered as a resource to another directory so that it is no longer considered as a resource.
+
+    public void removeArtifact() throws IOException {
+        try {
+           Files.delete(Paths.get(artifactDir, ARTIFACT_FILENAME));
+
+        }
+        catch (Exception e){
+            throw(e);
+        }
+    }
+    
+    
+  
 
     private String retrieveLocalSelfDescription() throws Exception {
         DapsSecurityTokenProvider daps	= DapsSecurityTokenProviderGenerator.generate(dapsUrl,keyStoreFile,keyStorePwd,keyStoreAlias,dapsUUID);
@@ -215,6 +237,7 @@ public class RetrieveArtifactTest {
         Artifact baseConnector = serializer.deserialize("{" + selfDescription + "}", Artifact.class);
 
         if (baseConnector.getId() != null) {
+            System.out.println(baseConnector.getId());
             return Optional.of(baseConnector.getId());
         }
         return Optional.empty();
@@ -224,7 +247,7 @@ public class RetrieveArtifactTest {
         DapsSecurityTokenProvider daps	= DapsSecurityTokenProviderGenerator.generate(dapsUrl,keyStoreFile,keyStorePwd,keyStoreAlias,dapsUUID);
         Message msg = new ArtifactRequestMessageBuilder()
                 ._requestedArtifact_(requestedArtifact)
-                ._authorizationToken_(new TokenBuilder()._tokenValue_("sometokenvalue").build())
+                ._authorizationToken_(new TokenBuilder()._tokenValue_("sometokenvalue")._tokenFormat_(TokenFormat.JWT).build())
                 ._issuerConnector_(new URI(component))
                 ._issued_(CalendarUtil.now())
                 ._modelVersion_(modelversion)
@@ -290,5 +313,22 @@ public class RetrieveArtifactTest {
             e.printStackTrace();
             return null;
         }
+    }
+    //4.The Test asks again and checks wheter the Artificats have been deleted.
+    //A check post cleanup to perform an external IO operation if the artifact is deleted successfully or not.
+    @Test
+    public void artifactRemoved() throws Exception {
+        String SelfDescription = retrieveLocalSelfDescription();
+    	System.out.println(SelfDescription);
+        boolean exists = SelfDescription.contains("ARTIFACT_FILENAME");
+    	if(exists==true) {
+    		 Assert.assertTrue("File still exists",false );
+    	}
+    	else {
+   		 Assert.assertTrue(ARTIFACT_FILENAME+"File deleted successfully", true);
+   	}
+    	
+    	
+  
     }
 }

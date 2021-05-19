@@ -35,7 +35,7 @@ public class DynamicConnectorSelfDescriptionTest {
     public void setUp() throws URISyntaxException, MalformedURLException {
         URI component = new URI(this.component);
         URI maintainer = new URI(this.maintainer);
-        selfDescription = new DynamicConnectorSelfDescription(component, maintainer, modelversion);
+        selfDescription = new DynamicConnectorSelfDescription(component, maintainer, modelversion, new URI("https://connector.example.org"));
     }
 
     @Test

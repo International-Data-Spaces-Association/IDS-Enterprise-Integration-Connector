@@ -61,6 +61,9 @@ public class Main implements ComponentInteractorProvider {
     @Value("${component.maintainer}")
     private String componentMaintainer = "";
 
+    @Value("${endpoint.url}")
+    private String componentEndpoint = "";
+
     @Value("${artifact.directory}")
     private String artifactDir;
 
@@ -145,7 +148,7 @@ public class Main implements ComponentInteractorProvider {
             }
             // (currently) MDM-specific parts
             DirectoryWatcher watcher = new DirectoryWatcher(artifactDir);
-            DynamicConnectorSelfDescription selfDescriptionProvider = new DynamicConnectorSelfDescription(new URI(componentUrl), new URI(componentMaintainer), componentModelVersion);
+            DynamicConnectorSelfDescription selfDescriptionProvider = new DynamicConnectorSelfDescription(new URI(componentUrl), new URI(componentMaintainer), componentModelVersion, new URI(componentEndpoint));
             LoggingInteractor loggingInteractor = new LoggingInteractor(new URI(loggingIn), new URI(loggingOut), daps, loggerIgnore);
 
             RemoteComponentInteractor remoteBrokerComponent = RemoteComponentInteractorFactory.getInstance().create(new URL(brokerUrl));
@@ -166,7 +169,7 @@ public class Main implements ComponentInteractorProvider {
                     selfDescriptionProvider,
                     new URI(participantString),
                     dapsInteractionConfig,
-                    remoteBrokerLogging, watcher, negotiationServiceURL, loggingInteractor,
+                    remoteBrokerLogging, watcher, negotiationServiceURL, artifactMainDir, loggingInteractor,
                     trustedJwksHosts, brokerIgnore);
 
             multipartComponentInteractor = new MultipartComponentInteractor(component, daps, selfDescriptionProvider.getSelfDescription().getId(), false);
