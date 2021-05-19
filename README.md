@@ -91,6 +91,68 @@ A Reverse Proxy is used to handle all incoming messages. It provides two HTTPS s
 The MDM Connector code heavily relies on the IDS Components (IAIS git, for access ask [Sebastian Bader](mailto:sebastian.bader@iais.fraunhofer.de)). Custom MessageHandler for any IDS Message can be added and registered in the AppConfig class. Properties, for instance URLs of IDS infrastructure components, are inserted in the applications.properties file.
 
 
+### Artifact Change Manager
+
+The connector listens through Artifact Listener via Artifact Change Manager. User(Consumer) can modify and delete artifact files available in the local directory.
+For add operations if a Contract Offer is formed it is linked properly with other resource. The linking between a resource(artifact) and Contract Offer is done through Contract which provides Abstract set of rules governing usage of resource.
+This resource also contains artifacts corresponding to contract offer format for artifact, description and contract containing the permissions and prohibitions. 
+For removing each contract is only deactivated through its corresponding the artifact.
+
+
+### Directory Watcher
+Directory watcher class takes care that all the artifacts available in this directory of directory watcher are being monitored. Hence it monitors external file IO operations as events which includes permissions to local files. Permissions are taken care with the help of a key provided. Directory Watcher keeps track of active artifact listeners available and notifies in case any discrepancies happening with artifacts while modifying them. Each event is created new or modified or deleted with the help of a watch service.
+A watch service that watches registered objects for changes and events. For example, a file manager may use a watch service to monitor a directory for changes so that it can update its display of the list of files when files are created or deleted.
+
+
+### Contract Util
+Contract Util Class handles creation of new contract offers and contract agreements via the incoming Contract Requests for the consumers and providers. Incoming contract request are compared with Contract Offer coming from Artifact Listener. Additional functionalities, also include the comparison of contracts.
+
+### RemoteBrokerLogging
+Provides interactor component class named LoggingInteractor for sending Message and Payload to an External Logging Service, where Inclusion of DAPS might be possible. Another component class to interact with remote broker is to Remotecomponentinteractor. Hence all the remote broker operations like registers and deregistering or updating are handled by Remote Broker Logging class.
+
+### Handlers
+Handlers are message handlers that process the incoming request messages and send the response as per the required incoming request.
+
+Information as add on:
+ArtifactIndex provides all the required functions for Artifacts, Contracts, Negotiations and makes sure that in case they are present and extends ArtifactFileProvider interface which provides the file. 
+ 
+#### ArtifactWithContractHandler
+
+Handles the incoming request for the artifact provides the requested artifact. Contract information is fetched from the requested artifact. The generation of artifact response is dependent on whether the request has a valid contract or not. If artifact has a contract attached with it, then a Contract Agreement is looked upon further. 
+
+#### ContractAgreementMessageHandler
+Checks whether a ContractAgreement is acceptable or should be rejected. Check if the incoming requested Contract agreement and its sender(consumer) follow the contract offer standards mentioned in ContractUtil (as explained above).
+
+#### ContractOfferMessageHandler
+This class rejects ContractOfferMAP.
+
+#### ContractRequestMessageHandler
+Contract Negotiation Handler from Provider perspective.  This class performs the following functions to handle the incoming request message:
+
+•	To handle the incoming request message it tests if the Message Payload, artifact , sender agent is present. Apart from that it checks from the received contract request whether or not the contract matches already existing contract.
+•	For contract negotiation acceptance it converts the request to final agreement
+•	Sends a final Contract Agreement Message on the basis of ContractRequest to the consumer.
+•	Creates a Default Contract Offer to send it to the targetArtifact of Consumer as contract response.
+
+
+This class checks for all resources and processes them. This class checks on the availability of the required artifacts in the requested message.  A particular artifact fetched from the target of the requested message.
+Another function of this class is to process the negotiation of contract. By converting request to agreement and release the final contractagreement formed on the basis of the incoming contractagreementmessage for the negotiation.
+
+
+#### DescriptionRequestMessageHandler
+This class provides with DescriptionResponseMap based on incoming DescriptionResquestMap. Here it is made sure that entities like Resource Catalog and its resources are available. As the DescriptionResponse map is dependent(or formed based) on the Resource Catalog and its resources.
+
+
+### DynamicConnectorSelfDescription
+Self-description contains primary information for any infrastructure component.   Hence the creation of all entities like Resources, under ResourceCatalog, Constraint, Representation and Contract Offer at Component Level (For a given BaseConnector). DynamicArtifactSelfDescriptionProvider and SelfDescriptionProvider are other classes for references. Hence whole connector response comes through DynamicConnectorSelfDescription. (This is only used in two Cases, either a user opens the landing page in the browser or sends a DescritopnRequestMessage)
+### LoggingInteractor
+Class for sending incoming and outgoing Message And Payload to an External Logging Service(Logger). This class also takes care of message formats with the help of class named Multipart. (All information in the IDS is exchanged as HTTP Multipart, so this class is used in all of the Interaction Handlers)
+
+### AppConfig
+App Config class is responsible for internal wiring of the connector. This class acts as a starting point  for sending message requests from Provider’s end via all the message Handlers, hence providing a base for components. Apart from that it takes care of DAPS security configuration by generating security token with the help of certificate available on the local system.
+### LocalConnectorConfig
+LocalConnectorConfig class takes care of the local component which is here Connector information like URL, Maintainer and Model version of the Local Connector.
+
 ## App Integrations
 ### SFTP
 The SFTP Integration is based on a seperate Docker Container.
@@ -176,9 +238,6 @@ Releases conform to the major and minor IDS Information Model versions.
 1.0.1   
 - Detect artifacts automatically on startup
 - Register at a Broker on startup
-
-
-
 
 
 ## Contributors (Fraunhofer IAIS)
