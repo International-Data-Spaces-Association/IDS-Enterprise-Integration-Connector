@@ -7,10 +7,11 @@ import de.fraunhofer.iais.eis.Resource;
 import net.minidev.json.JSONObject;
 
 import javax.validation.constraints.NotNull;
-import java.io.File;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 public class InMemoryArtifactIndex implements ArtifactIndex {
 
+    private String path = "";
     private Map<File, Artifact> index = new HashMap<>();
     private Map<Artifact, Contract> contractIndex = new HashMap<>();
     private Map<Artifact, Resource> descriptionIndex = new HashMap<>();
@@ -147,11 +149,13 @@ public class InMemoryArtifactIndex implements ArtifactIndex {
             signedContractIndex.put(artifact, new HashMap<>());
             signedContractIndex.get(artifact).put(otherParty, contract);
         }
+        if(path !="") { save();}
     }
 
     @Override
     public void removeSignedContract(Artifact artifact, URI otherParty) {
         signedContractIndex.get(artifact).remove(otherParty);
+        if(path !="") { save();}
     }
 
     @Override
@@ -173,4 +177,46 @@ public class InMemoryArtifactIndex implements ArtifactIndex {
         }
         return null;
     }
+
+    @Override
+    public void save() {
+        try {
+            File fileOne=new File(path);
+            FileOutputStream fos=new FileOutputStream(fileOne);
+            ObjectOutputStream oos=new ObjectOutputStream(fos);
+            oos.writeObject(signedContractIndex);
+            oos.flush();
+            oos.close();
+            fos.close();
+        } catch(Exception e) {
+
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void addPersistanceStorage(String path)
+    {
+        if (path != "")
+        this.path = path;
+    }
+
+    @Override
+    public void load() {
+        try {
+            File toRead=new File(path);
+            FileInputStream fis=new FileInputStream(toRead);
+            ObjectInputStream ois=new ObjectInputStream(fis);
+            signedContractIndex=( HashMap<Artifact,HashMap<URI, ContractAgreement>>) ois.readObject();
+            ois.close();
+            fis.close();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+
 }

@@ -39,6 +39,7 @@ class AppConfig {
                                     RemoteBroker remoteBroker,
                                     DirectoryWatcher watcher,
                                     String negotiationServiceURL,
+                                    String contractPersistance,
                                     LoggingInteractor logging,
                                     Collection<String> trustedJwksHosts,
     boolean brokerIgnore) throws InfomodelFormalException, URISyntaxException {
@@ -62,6 +63,9 @@ class AppConfig {
 
         // Artifact change handling
         ArtifactIndex artifactIndex = new InMemoryArtifactIndex();
+        artifactIndex.addPersistanceStorage(contractPersistance +"/file.sav");
+        artifactIndex.load();
+
         MessageHandler artifactHandler = new ArtifactWithContractHandler(selfDescriptionProvider.getSelfDescription(), artifactIndex, daps, logging);
         ArtifactChangeManager artifactChangeManager = new ArtifactChangeManager(remoteBroker, artifactIndex, selfDescriptionProvider, daps, brokerIgnore);
         watcher.setArtifactListeners(Arrays.asList(artifactChangeManager));

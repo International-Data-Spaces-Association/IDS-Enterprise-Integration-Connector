@@ -43,5 +43,9 @@ public interface ArtifactIndex extends ArtifactFileProvider {
     void removeDescription(Artifact artifact);
     boolean hasDescription(Artifact artifact);
     Resource getDescription(Artifact artifact);
+
+    void addPersistanceStorage(String path);
+    void save();
+    void load();
     
 }

@@ -169,7 +169,7 @@ public class Main implements ComponentInteractorProvider {
                     selfDescriptionProvider,
                     new URI(participantString),
                     dapsInteractionConfig,
-                    remoteBrokerLogging, watcher, negotiationServiceURL, loggingInteractor,
+                    remoteBrokerLogging, watcher, negotiationServiceURL, artifactMainDir, loggingInteractor,
                     trustedJwksHosts, brokerIgnore);
 
             multipartComponentInteractor = new MultipartComponentInteractor(component, daps, selfDescriptionProvider.getSelfDescription().getId(), false);
