@@ -5,14 +5,14 @@
 
 	<groupId>de.fraunhofer.iais.eis.ids</groupId>
 	<artifactId>mdm-connector</artifactId>
-	<version>4.0.4-SNAPSHOT</version>
+	<version>4.0.8-SNAPSHOT</version>
 
 	<modelVersion>4.0.0</modelVersion>
 
 	<properties>
-		<ids-components.version>4.0.4-SNAPSHOT</ids-components.version>
-		<ids-infomodel.version>4.0.4-SNAPSHOT</ids-infomodel.version>
-		<ids-serializer.version>4.0.4-SNAPSHOT</ids-serializer.version>
+		<ids-components.version>4.0.8-SNAPSHOT</ids-components.version>
+		<ids-infomodel.version>4.0.8-SNAPSHOT</ids-infomodel.version>
+		<ids-serializer.version>4.0.8-SNAPSHOT</ids-serializer.version>
 		<spring-boot.version>2.1.16.RELEASE</spring-boot.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-boot.run.main-class>de.fraunhofer.iais.eis.ids.connector.main.Main</spring-boot.run.main-class>

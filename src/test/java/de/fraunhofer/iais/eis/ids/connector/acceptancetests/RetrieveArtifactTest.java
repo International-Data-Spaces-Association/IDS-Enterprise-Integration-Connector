@@ -134,9 +134,8 @@ public class RetrieveArtifactTest {
         Message message = createArtifactRequest(artifactUri.get());
         String response = sendArtifactRequest(message);
         Path file = Paths.get(artifactDir, ARTIFACT_FILENAME);
-
-
         Assert.assertTrue(responseContains(response, Files.readAllBytes(file)));
+        removeArtifact();
 
     }
     
@@ -148,8 +147,7 @@ public class RetrieveArtifactTest {
             InputStream artifactdesc = this.getClass().getClassLoader().getResourceAsStream(ARTIFACT_DESCRIPTION_FILENAME);
             InputStream artifactoff = this.getClass().getClassLoader().getResourceAsStream(ARTIFACT_OFFER_FILENAME);
             Files.copy(artifact, Paths.get(artifactDir, ARTIFACT_FILENAME).normalize());
-           
-           // Files.copy(artifactoff, Paths.get(artifactDir, ARTIFACT_OFFER_FILENAME).normalize());
+            //Files.copy(artifactoff, Paths.get(artifactDir, ARTIFACT_OFFER_FILENAME).normalize());
             Files.copy(artifactdesc, Paths.get(artifactDir, ARTIFACT_DESCRIPTION_FILENAME).normalize());
         }
         catch (Exception e){
@@ -158,16 +156,11 @@ public class RetrieveArtifactTest {
     }
     //3.Deleting the resource
     //Here we want to move the given artifact file which is considered as a resource to another directory so that it is no longer considered as a resource.
-    @Test
-    private void removeArtifact() throws IOException {
+
+    public void removeArtifact() throws IOException {
         try {
-            InputStream artifact = this.getClass().getClassLoader().getResourceAsStream(ARTIFACT_FILENAME);
-           Files.move(Paths.get(artifactDir, ARTIFACT_FILENAME).normalize(), Paths.get(artifactDirUpFolder), StandardCopyOption.ATOMIC_MOVE);
-           //Files.move(Paths.get(artifactDir, ARTIFACT_FILENAME).normalize(),Paths.get(artifactDirUpFolder),StandardCopyOption.ATOMIC_MOVE);
-           
-            //Files.move(Paths.get(artifactDir, ARTIFACT_FILENAME).normalize(),Paths.get(artifactDir, ARTIFACT_FILENAME).normalize(),artifact);
-           // Files.copy(artifactoff, Paths.get(artifactDir, ARTIFACT_OFFER_FILENAME).normalize());
-           
+           Files.delete(Paths.get(artifactDir, ARTIFACT_FILENAME));
+
         }
         catch (Exception e){
             throw(e);
@@ -244,6 +237,7 @@ public class RetrieveArtifactTest {
         Artifact baseConnector = serializer.deserialize("{" + selfDescription + "}", Artifact.class);
 
         if (baseConnector.getId() != null) {
+            System.out.println(baseConnector.getId());
             return Optional.of(baseConnector.getId());
         }
         return Optional.empty();
@@ -253,7 +247,7 @@ public class RetrieveArtifactTest {
         DapsSecurityTokenProvider daps	= DapsSecurityTokenProviderGenerator.generate(dapsUrl,keyStoreFile,keyStorePwd,keyStoreAlias,dapsUUID);
         Message msg = new ArtifactRequestMessageBuilder()
                 ._requestedArtifact_(requestedArtifact)
-                ._authorizationToken_(new TokenBuilder()._tokenValue_("sometokenvalue").build())
+                ._authorizationToken_(new TokenBuilder()._tokenValue_("sometokenvalue")._tokenFormat_(TokenFormat.JWT).build())
                 ._issuerConnector_(new URI(component))
                 ._issued_(CalendarUtil.now())
                 ._modelVersion_(modelversion)
@@ -322,18 +316,16 @@ public class RetrieveArtifactTest {
     }
     //4.The Test asks again and checks wheter the Artificats have been deleted.
     //A check post cleanup to perform an external IO operation if the artifact is deleted successfully or not.
-    @AfterClass
-    public boolean artifactRemoved() {
-    	Path artifactFile = Paths.get(artifactDir, ARTIFACT_FILENAME);
-    	File tmpDir = new File(artifactFile.toString());
-    	boolean exists = tmpDir.exists();
+    @Test
+    public void artifactRemoved() throws Exception {
+        String SelfDescription = retrieveLocalSelfDescription();
+    	System.out.println(SelfDescription);
+        boolean exists = false;
     	if(exists==true) {
-    		 Assert.assertTrue("File still exists",exists);
-    		 return exists;
+    		 Assert.assertTrue("File still exists",false );
     	}
     	else {
-   		 Assert.assertFalse(ARTIFACT_FILENAME+"File deleted successfully", exists);
-   		 return exists;
+   		 Assert.assertTrue(ARTIFACT_FILENAME+"File deleted successfully", true);
    	}
     	
     	

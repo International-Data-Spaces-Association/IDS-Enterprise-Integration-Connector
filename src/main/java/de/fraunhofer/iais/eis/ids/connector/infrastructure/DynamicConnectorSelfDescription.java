@@ -30,15 +30,16 @@ public class DynamicConnectorSelfDescription implements DynamicArtifactSelfDescr
 
     @NotNull
     final URI componentId;
-
+    private final URI accessURL;
     private final URI maintainerId;
     private final String modelVersion;
     private ArtifactIndex artifacts;
 
-    public DynamicConnectorSelfDescription(@NotNull URI component, URI maintainer, String modelVersion) {
+    public DynamicConnectorSelfDescription(@NotNull URI component, URI maintainer, String modelVersion, URI accessURL) {
         this.componentId = component;
         this.maintainerId = maintainer;
         this.modelVersion = modelVersion;
+        this.accessURL = accessURL;
     }
 
     @Override
@@ -79,6 +80,7 @@ public class DynamicConnectorSelfDescription implements DynamicArtifactSelfDescr
                 ._outboundModelVersion_(modelVersion)
                 ._resourceCatalog_(Util.asList(catalog))
                 ._securityProfile_(SecurityProfile.BASE_SECURITY_PROFILE)
+                ._hasDefaultEndpoint_(new ConnectorEndpointBuilder()._accessURL_(accessURL).build())
                 .build();
     }
 
@@ -105,15 +107,22 @@ public class DynamicConnectorSelfDescription implements DynamicArtifactSelfDescr
                 if (contract == null && description.getContractOffer() == null) {
                     contract = createDefaultContract(artifact.getId());
                 }
-                if (contract != null) {
-                    try {
-                        Method contractSetter = description.getClass().getMethod("setContractOffer", ArrayList.class);
-                        contractSetter.invoke(description, Util.asList((ContractOffer) contract));
-                    } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-                        logger.warn("reflection error while adding contract to the artifact description of " + artifact.getFileName());
-                        e.printStackTrace();
-                    }
+                else if (contract instanceof ContractOffer) {
+
+                    artifacts.addContract(artifact, contract);
+
+                } else if (contract instanceof ContractRequest) {
+
+                    ArrayList<ContractRequest> requests = new ArrayList<ContractRequest>();
+
+                } else if (contract instanceof ContractAgreement) {
+
+                    ArrayList<ContractAgreement> agreements = new ArrayList<ContractAgreement>();
+                    agreements.add((ContractAgreement) contract);
+                    // only offers can be added
+
                 }
+
                 resources.add(description);
             }
 
@@ -175,7 +184,7 @@ public class DynamicConnectorSelfDescription implements DynamicArtifactSelfDescr
 
 
         // permission only valid for five minutes
-        ArrayList<Constraint> permissionConstraints = new ArrayList<Constraint>() {{
+        ArrayList<AbstractConstraint> permissionConstraints = new ArrayList<AbstractConstraint>() {{
             add(
                     new ConstraintBuilder()
                             ._leftOperand_(LeftOperand.POLICY_EVALUATION_TIME)
